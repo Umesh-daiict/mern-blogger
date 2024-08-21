@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import authRoutes from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 
@@ -26,12 +27,8 @@ app.listen(3000, () => {
   console.log('Server is running on port 3000!');
 });
 
-
-app.use(express.static(path.join(__dirname, '/client/dist')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
+console.log("dsaj")
+app.use('/api/auth', authRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
